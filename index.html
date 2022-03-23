@@ -37,7 +37,7 @@
     <script src="./assets/js/sdk/apigClient.js"></script>
 
     <script src="./assets/js/aws-sdk.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -59,15 +59,7 @@
             </div>
           </div>
 
-          <div class="inner">
-            <!-- <div class="chat">
-              <div class="messages">
-                <div class="messages-content"></div>
-              </div>
-              <div class="message-box">
-                <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
-              </div>
-            </div> -->
+          <div class="uploadPhoto">
             <div class="center">
               <div class="form-input">
                 <div class="preview">
@@ -87,7 +79,25 @@
                 <div class="card-header" id="addName"></div>
             </div>
           </div>
-
+          <div class="searchPhoto">
+            <div class="searchBar">
+              <div class="speechToText">
+                <div class="container">
+                  <div class="row height d-flex justify-content-center align-items-center">
+                      <div class="col-md-6">
+                          <div class="form"> <i class="fa fa-search"></i> <input type="text" id="search-box" class="form-control form-input search" onkeydown="search(this)" placeholder="Search photos based on tags..."> <span class="left-pan"><i class="fa fa-microphone" onclick="runSpeechRecognition()"></i></span> </div>
+                          <div id="output" class="hide"></div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id = "imageDisplaySection">
+              <div id="imageDisplay">
+                <!-- <img src="https://s3.amazonaws.com/photoalbumcc/photo-1542841791-3f32162641bc.jpg" alt="Trulli"> -->
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>

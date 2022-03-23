@@ -180,3 +180,84 @@ function uploadPhoto() {
   };
   reader.readAsArrayBuffer(file);
 }
+
+function search(ele) {
+  if(event.key === 'Enter') {
+    displayImages();     
+  }
+}
+
+function displayImages() {
+  let queryText = document.getElementById("search-box").value;
+  document.getElementById("imageDisplaySection").style.visibility = 'visible';
+  var params = {
+    headers: {
+      param0: 'Accept:application/json',
+    },
+    'q' : queryText
+  };
+  var body = []
+  var apigClient = apigClientFactory.newClient({apiKey:'iWWl6Y9PtI9VSkCfE18FTaWZqbBPdgWf25uQ7grB'});
+    apigClient.searchGet(params,body)
+    .then(function(result){
+      var data =  result['data'];
+      console.log(data.s3_base_url + "/"+ data.images[0]);
+      // base = JSON.parse(result['data']['s3_base_url'])
+      images = data.images;
+      var num_images = images.length;
+      if (num_images > 0){
+        img_area = document.getElementById('imageDisplay');
+        img_area.innerHTML = "";
+        
+        let html = "";
+        images.forEach(matchedImage => {
+          console.log("matchedImage ", matchedImage);
+            html += `
+            <div class="gallery">
+              <img src="${data.s3_base_url + '/' + matchedImage}" alt="${matchedImage}" width="250" height="250">
+              <div class="desc">${data.search_string + ': ' + matchedImage}</div>
+            </div>`;
+        });
+        img_area.innerHTML = html;
+      }
+      else{
+          img_area = document.getElementById('imageDisplay')
+          img_area.innerHTML = "";
+          img_area.innerHTML += 'No Photos'
+          alert("Oops, the requested photo(s) could not be found!");
+        }
+      });
+}
+
+function runSpeechRecognition() {
+  // get output div reference
+  var output = document.getElementById("output");
+  // get action element reference
+  var action = document.getElementById("action");
+      // new speech recognition object
+      var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+      var recognition = new SpeechRecognition();
+  
+      // This runs when the speech recognition service starts
+      recognition.onstart = function() {
+          action.innerHTML = "<small>listening, please speak...</small>";
+      };
+      
+      recognition.onspeechend = function() {
+          action.innerHTML = "<small>stopped listening, hope you are done...</small>";
+          recognition.stop();
+      }
+    
+      // This runs when the speech recognition service returns result
+      recognition.onresult = function(event) {
+          var transcript = event.results[0][0].transcript;
+          var confidence = event.results[0][0].confidence;
+          var text = document.getElementById('search-box');
+          text.value += transcript;
+          // output.innerHTML = "<b>Text:</b> " + transcript + "<br/> <b>Confidence:</b> " + confidence*100+"%";
+          // output.classList.remove("hide");
+      };
+    
+       // start recognition
+       recognition.start();
+}
