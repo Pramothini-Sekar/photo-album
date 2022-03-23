@@ -1,15 +1,12 @@
-# Chatbot Concierge #
+# Photo Album #
 
 ## About ##
 
-Frontend starter repository for HW 1 of the Cloud Computing & Big Data
-class at Columbia University and New York University.
+Frontend repository for HW 2 of the Cloud Computing & Big Data class at Columbia University.
 
 ## Usage ##
 
 1. Clone the repository.
-2. Replace `/assets/js/sdk/apigClient.js` with your own SDK file from API
-   Gateway.
-3. Open `index.html` in any browser.
-4. Start sending messages to test the chatbot interaction.
+2. Open `index.html` in any browser.
+3. Start browsing, searching and uploading photos for your personal album.
 
